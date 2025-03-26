@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_service
+    restart: always
+    ports:
+      - '8000:80'
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
+  php:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    container_name: php_service
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www
